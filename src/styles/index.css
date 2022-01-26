@@ -1,0 +1,49 @@
+/*! @import */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  margin: 0;
+  overflow: hidden;
+}
+svg {
+  display: unset;
+}
+button:focus {
+  outline: none;
+}
+
+@responsive {
+  .transition-width {
+    transition-property: width;
+  }
+
+  .flex-center {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .min-height-10 {
+    min-height: 2.5rem;
+  }
+
+  .min-width-32 {
+    min-width: 8rem;
+  }
+}
+.ml-10 {
+  margin-left: 10px;
+}
+.el-popper {
+  max-width: 800px;
+}
+
+.cell > button {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.cell > .my-btn-class > button {
+  margin-bottom: 10px;
+}
