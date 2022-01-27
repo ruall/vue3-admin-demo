@@ -16,7 +16,7 @@
         @current-change="handleRadioChange"
       >
         <el-table-column align="center" v-if="showSelection" type="selection" width="55" />
-        <el-table-column v-if="showIndex" type="index" align="center" :label="$t('xu-hao')" fixed="left" width="50">
+        <el-table-column v-if="showIndex" type="index" align="center" label="序号" fixed="left" width="50">
           <template #default="scope">
             <span>{{ (pageNo - 1) * pageSize + scope.$index + 1 }}</span>
           </template>
@@ -49,9 +49,8 @@
     </div>
   </div>
 </template>
-<script>
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'qp-table',
   props: {
@@ -92,7 +91,7 @@ export default defineComponent({
       default: false
     },
     columns: {
-      type: Array,
+      type: Array as any,
       required: true
     },
     // 翻页的属性
@@ -115,20 +114,19 @@ export default defineComponent({
   },
   emits: ['handleSelectionChange', 'handleCurrentChange', 'handleRadioChange'],
   setup(props, { emit, attrs }) {
-    const { t } = useI18n()
-    const tableRef = ref(null)
-    const onChangeSort = (val) => {
+    const tableRef = ref(null) as any
+    const onChangeSort = (val: any) => {
       console.log(val)
     }
 
-    const handleSelectionChange = (selection) => {
+    const handleSelectionChange = (selection: any) => {
       emit('handleSelectionChange', selection)
     }
-    const handleRadioChange = (selection) => {
+    const handleRadioChange = (selection: any) => {
       emit('handleRadioChange', selection)
     }
     // 翻页方法
-    const handleCurrentChange = (currentPage) => {
+    const handleCurrentChange = (currentPage: any) => {
       emit('handleCurrentChange', currentPage)
     }
 
@@ -137,7 +135,7 @@ export default defineComponent({
       tableRef.value.clearSelection()
     }
     //清除某一项选中状态
-    const clearRow = (row, isCheck) => {
+    const clearRow = (row: any, isCheck: any) => {
       tableRef.value.toggleRowSelection(row, isCheck)
     }
     return {

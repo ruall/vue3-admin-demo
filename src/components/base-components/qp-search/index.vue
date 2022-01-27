@@ -21,7 +21,7 @@
         v-model="item.val"
         type="date"
         format="YYYY-MM-DD"
-        :placeholder="$t('snandj')"
+        placeholder="选择日期"
         clearable
       />
       <el-date-picker
@@ -29,9 +29,9 @@
         v-model="item.val"
         type="datetimerange"
         :editable="false"
-        :range-separator="$t('zhi')"
-        :start-placeholder="$t('kai-shi-shi-jian')"
-        :end-placeholder="$t('jie-shu-shi-jian')"
+        range-separator="至"
+        start-placeholder="开始时间"
+        end-placeholder="结束时间"
         value-format="YYYY-MM-DD HH:mm:ss"
         format="YYYY-MM-DD HH:mm:ss"
         clearable
@@ -48,8 +48,9 @@
         clearable
       />
     </el-form-item>
-    <el-button type="primary" icon="el-icon-search" @click="onSubmitForm()">{{ $t('mkgsa') }}</el-button>
-    <el-button type="primary" v-if="showExport" @click="exportBtn()">{{ $t('dao-chu-shu-ju') }}</el-button>
+    <el-button type="primary" icon="el-icon-search" @click="onSubmitForm()">搜索</el-button>
+    <el-button v-if="showReset" icon="el-icon-refresh" @click="onResetForm()">重置</el-button>
+    <el-button type="primary" v-if="showExport" @click="exportBtn()">导出数据</el-button>
     <el-button type="primary" v-if="showBtn" @click="btnClick()">{{ btnText }}</el-button>
     <el-button v-for="(item, index) in btnList" :key="index" :type="item.type" @click="item.fun(item.obj)">
       {{ item.name }}
@@ -57,9 +58,8 @@
   </el-form>
   <!-- </el-card> -->
 </template>
-<script>
+<script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
-import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'qp-search',
   props: {
@@ -75,27 +75,30 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    showReset: {
+      type: Boolean,
+      default: false
+    },
     showBtn: {
       type: Boolean,
       default: false
     },
     btnText: String,
     btnList: {
-      type: [Array, Object],
+      type: [Array, Object] as any,
       default: []
     }
   },
   emits: ['data-search', 'data-export', 'data-btnclick'],
   setup(props, context) {
-    const { t } = useI18n()
-    const initData = props.data
-    const showLabel = props.showLabel
-    const showExport = props.showExport
+    const initData = props.data as any
+    const showLabel = props.showLabel as any
+    const showExport = props.showExport as any
     const formRef = ref()
 
     const inputComputed = computed(() => {
-      return (val) => {
-        return `${t('amdkla')}${val}`
+      return (val: any) => {
+        return `请输入${val}`
       }
     })
 

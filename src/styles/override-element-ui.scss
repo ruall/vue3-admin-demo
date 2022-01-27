@@ -7,3 +7,18 @@
 .el-popover.el-popper {
   min-width: 100px;
 }
+.el-tabs {
+  height: calc(100vh - 75px);
+}
+.el-cascader-panel {
+  .el-scrollbar:first-child {
+    .el-checkbox {
+      display: none;
+    }
+  }
+  .el-scrollbar:nth-child(2) {
+    .el-checkbox {
+      display: none;
+    }
+  }
+}

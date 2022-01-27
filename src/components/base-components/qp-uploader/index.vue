@@ -19,29 +19,28 @@
       :before-upload="onImageBeforeUpload"
     >
       <i v-if="fileType === 'image'" class="el-icon-plus"></i>
-      <el-button v-else>{{ $t('shang-chuan') }}</el-button>
+      <el-button v-else>上传</el-button>
       <template #tip>
         <div class="el-upload__tip" v-if="!loading">{{ placeholderStr }}</div>
       </template>
     </el-upload>
     <div class="w-20 h-20 loading-box flex justify-center items-center" v-else-if="loading">
       <i class="el-icon-loading"></i>
-      <i>{{ $t('shang-chuan-zhong') }}</i>
+      <i>上传中</i>
     </div>
     <el-dialog v-model="dialogVisible" append-to-body style="text-align: center">
-      <img style="width: 100%" :src="imageUrl" alt />
+      <img style="width: 100%" :src="imageUrl" />
     </el-dialog>
   </div>
 </template>
 
 <script lang="ts">
-import { reactive, toRefs, defineComponent, PropType, onMounted, watch, computed } from 'vue'
+import { reactive, toRefs, defineComponent, PropType, watch, computed } from 'vue'
 import { store } from '/@/store/index'
 import { ElMessage } from 'element-plus'
 import { fileExt } from '/@/utils/file'
 import Compressor from 'compressorjs'
 import { preview } from '/@/utils/file'
-import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'qp-uploader',
@@ -84,12 +83,10 @@ export default defineComponent({
   },
   emits: ['file-change'],
   setup(props, { emit }) {
-    const { t, locale } = useI18n()
     const state = reactive({
       baseUrl: import.meta.env.VITE_BASE_API,
       headers: {
-        Authorization: 'bearer ' + store.state.layout.token.ACCESS_TOKEN,
-        'Language-Type': locale
+        Authorization: 'bearer ' + store.state.layout.token.ACCESS_TOKEN
       },
       data: {
         fileType: 'png'
@@ -107,7 +104,7 @@ export default defineComponent({
       if (props.placeholder.length > 0) {
         return props.placeholder
       }
-      return `${t('mksadl')}`
+      return '只能上传 jpg/png/jpeg 文件，且不超过 20M'
     })
 
     watch(
@@ -131,7 +128,7 @@ export default defineComponent({
 
     const onHandleImageSuccess = (response: any, file: any, fileList: any) => {
       if (response.code === 0) {
-        ElMessage.success(t('mklans'))
+        ElMessage.success('上传成功')
         // @ts-ignore
         state.fileList.push({ url: response.data.fileUrl, name: file.name })
         state.loading = false
@@ -150,12 +147,12 @@ export default defineComponent({
         const size = file.size / 1024 / 1024 < 20
         if (!isImage) {
           state.loading = false
-          ElMessage.error(`${t('hgfsas')}!`)
+          ElMessage.error('上传图片只能是 JPG/PNG/JPEG 格式！')
           return false
         }
         if (!size) {
           state.loading = false
-          ElMessage.error(`${t('fabsdja')}!`)
+          ElMessage.error('上传图片大小不能超过 20MB！')
           return false
         }
         const compressor = new Promise((resolve) => {
@@ -201,7 +198,7 @@ export default defineComponent({
         const isFile = file.type === 'application/pdf'
         if (!isFile) {
           state.loading = false
-          ElMessage.error(`${t('knjsa')}!`)
+          ElMessage.error('上传附件只能是 PDF 格式！')
           return false
         }
         return isFile
@@ -231,9 +228,7 @@ export default defineComponent({
     }
 
     const onExceed = () => {
-      ElMessage.warning(
-        `${t('njhvh')}${props.limit}${t('zhang')}${props.fileType === 'image' ? t('tu-pian') : t('ubhbh')}~`
-      )
+      ElMessage.warning(`最多只能上传${props.limit}张${props.fileType === 'image' ? '图片' : '附件'}~`)
     }
 
     const handlePreview = (file: any) => {
