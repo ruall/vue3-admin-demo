@@ -52,15 +52,30 @@
     </el-form-item>
   </el-form>
 </template>
-<script setup lang="ts">
+<script lang="ts">
 import { getDatas } from './index'
 import { qpUploader } from '/@/components'
+import { defineComponent } from 'vue'
 
-const { form, info, cascaderProps, onFileChange1, rules } = getDatas()
-const submit = () => {
-  console.log('submit!')
-}
-const cancel = () => {
-  console.log('submit!')
-}
+export default defineComponent({
+  components: { qpUploader },
+  setup() {
+    const { form, info, cascaderProps, onFileChange1, rules } = getDatas()
+    const submit = () => {
+      console.log('submit!')
+    }
+    const cancel = () => {
+      console.log('cancel!')
+    }
+    return {
+      form,
+      info,
+      cascaderProps,
+      onFileChange1,
+      rules,
+      submit,
+      cancel
+    }
+  }
+})
 </script>

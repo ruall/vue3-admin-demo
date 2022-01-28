@@ -23,8 +23,8 @@
     <div class="dialog-content"><dialogInfo ref="dialogRef" /></div>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="">取消</el-button>
-        <el-button type="primary" @click="">提交</el-button>
+        <el-button @click="onCancel()">取消</el-button>
+        <el-button type="primary" @click="onSubmit()">提交</el-button>
       </span>
     </template>
   </el-dialog>
@@ -33,10 +33,24 @@
 import { qpSearch, qpTable } from '/@/components/index'
 import { getDatas } from './index'
 import dialogInfo from './dialogInfo/index.vue'
+import { ref, nextTick } from 'vue'
 
 const { info, searchFun } = getDatas()
+const dialogRef = ref<HTMLElement | null>(null)
+
 const edit = (row: IObj) => {
   info.dialogInfo.isVisible = true
+}
+
+const onCancel = () => {
+  nextTick(() => {
+    ;(dialogRef.value as IObj)?.cancel()
+  })
+}
+const onSubmit = () => {
+  nextTick(() => {
+    ;(dialogRef.value as IObj)?.submit()
+  })
 }
 </script>
 <style lang="scss" scoped>
