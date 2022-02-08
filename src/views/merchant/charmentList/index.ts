@@ -135,6 +135,10 @@ export const getDatas = () => {
       console.log(info.tableData)
     }, 3000)
   }
+  const handleCurrentChange = (val: number) => {
+    info.pageNo = val
+    getList()
+  }
   getList()
-  return { info, searchFun }
+  return { info, searchFun, handleCurrentChange, getList }
 }

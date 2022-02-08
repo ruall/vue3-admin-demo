@@ -9,6 +9,7 @@
         :border="border"
         :highlight-current-row="highlightCurrentRow"
         :stripe="stripe"
+        row-key="id"
         max-height="630px"
         style="width: 100%"
         @select-all="handleSelectionChange"
