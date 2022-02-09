@@ -25,7 +25,7 @@ export const getDatas = () => {
     loading: true,
     searchData: {
       dates: { label: '入驻时间', val: '', type: 'timerange' },
-      input: { label: '搜索商品名称/发布人', val: '', showIcon: 'el-icon-search' },
+      input: { label: '商品名称/发布人', val: '', showIcon: 'el-icon-search' },
       status: {
         label: '请选择商品属性',
         val: '',

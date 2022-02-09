@@ -17,9 +17,9 @@ export const getDatas = () => {
     columns: [
       { slot: 'name1' },
       { prop: 'name2', label: '类型名称', width: '200px' },
-      { prop: 'name3', label: '包含商品数量', width: '150px' },
-      { slot: 'name5', label: '状态' },
-      { prop: 'name4', label: '调整排序', width: '150px' },
+      { prop: 'name3', label: '包含商品数量' },
+      { slot: 'name5' },
+      { prop: 'name4', label: '状态' },
       { slot: 'operate' }
     ],
     pageNo: 1,
