@@ -1,5 +1,5 @@
 <template>
-  <el-button type="primary">添加类型</el-button>
+  <el-button type="primary">添加城市</el-button>
   <qp-table
     :loading="info.loading"
     :columns="info.columns"
@@ -17,23 +17,18 @@
       </el-table-column>
     </template>
   </qp-table>
-  <el-dialog v-model="info.dialogInfo.isVisible" width="50%" center>
+  <el-dialog v-model="info.dialogInfo.isVisible" width="50%" center :show-close="false" :close-on-click-modal="false">
     <el-form
       ref="ruleFormRef"
       :model="info.dialogInfo.ruleForm"
       status-icon
       :rules="info.dialogInfo.rules"
       label-width="120px"
-      class="demo-ruleForm"
     >
       <el-form-item label="排序">
-        <el-input
-          v-model="info.dialogInfo.ruleForm.name1"
-          v-input-number="{ min: 0, max: 10 }"
-          autocomplete="off"
-        ></el-input>
+        <el-input v-model="info.dialogInfo.ruleForm.name1" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="分类名称" prop="name2">
+      <el-form-item label="城市名称" prop="name2">
         <el-input v-model="info.dialogInfo.ruleForm.name2" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="状态" prop="name3">

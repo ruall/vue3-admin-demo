@@ -4,5 +4,6 @@ import Product from './modules/product'
 import Dynamic from './modules/dynamic'
 import Check from './modules/check'
 import Marketing from './modules/marketing'
+import System from './modules/system'
 // 默认路由
-export default [Merchant, User, Product, Dynamic, Check, Marketing]
+export default [Merchant, User, Product, Dynamic, Check, Marketing, System]

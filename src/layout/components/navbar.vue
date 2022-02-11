@@ -8,32 +8,11 @@
       }"
       @click="changeCollapsed"
     />
-    <!-- 面包屑导航 -->
-    <!-- <div class="px-4 hidden-xs-only">
-      <el-breadcrumb separator="/">
-        <transition-group name="breadcrumb">
-          <el-breadcrumb-item key="/" :to="{ path: '/' }"
-            >主页</el-breadcrumb-item
-          >
-          <el-breadcrumb-item
-            v-for="v in data.breadcrumbList"
-            :key="v.path"
-            :to="v.path"
-          >
-            {{ v.title }}
-          </el-breadcrumb-item>
-        </transition-group>
-      </el-breadcrumb>
-    </div> -->
   </div>
   <div class="flex items-center flex-row-reverse px-4 min-width-32">
     <!-- 用户下拉 -->
     <el-dropdown>
       <span class="el-dropdown-link flex flex-center mx-2">
-        <!-- <el-avatar
-          :size="30"
-          src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        /> -->
         <span class="ml-2">{{ userInfo.nickName }}</span>
         <i class="el-icon-arrow-down el-icon--right" />
       </span>
@@ -44,14 +23,39 @@
         </el-dropdown-menu>
       </template>
     </el-dropdown>
-    <!-- <Notice /> -->
   </div>
+  <el-dialog
+    v-model="changePwdDialog"
+    title="修改密码"
+    width="60%"
+    center
+    :show-close="false"
+    :close-on-click-modal="false"
+  >
+    <el-form ref="ruleFormRef" :model="ruleForm" status-icon :rules="rules" label-width="120px" class="demo-ruleForm">
+      <el-form-item label="旧密码" prop="old">
+        <el-input v-model="ruleForm.old" type="password" autocomplete="off" show-password></el-input>
+      </el-form-item>
+      <el-form-item label="新密码" prop="new">
+        <el-input v-model="ruleForm.new" type="password" autocomplete="off" show-password></el-input>
+      </el-form-item>
+      <el-form-item label="确认新密码" prop="check">
+        <el-input v-model="ruleForm.check" type="password" show-password></el-input>
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="changePwdDialog = false">取消</el-button>
+        <el-button type="primary" @click="changePwdDialog = false">保存</el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, watch } from 'vue'
+import { defineComponent, reactive, ref, watch } from 'vue'
 import { useStore } from '/@/store/index'
-import { useRoute, RouteLocationNormalizedLoaded, useRouter } from 'vue-router'
+import { useRoute, RouteLocationNormalizedLoaded } from 'vue-router'
 import Notice from '/@/layout/components/notice.vue'
 import { ElMessageBox } from 'element-plus'
 import { getLocal } from '/@/utils'
@@ -95,8 +99,39 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const route = useRoute()
-    const router = useRouter()
     const userInfo = getLocal('userInfo') as any
+    const changePwdDialog = ref(false)
+    const ruleForm = reactive({
+      new: '',
+      old: '',
+      check: ''
+    })
+    const Checks = (rule: { field: string }, value: any, callback: (arg0?: Error | undefined) => void) => {
+      if (rule.field === 'new') {
+        const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
+        if (!reg.test(value)) {
+          callback(new Error('请输入6—15位的密码，允许输入数字、字母、特殊符号。'))
+        }
+      } else if (rule.field === 'check') {
+        if (ruleForm.check !== ruleForm.new) {
+          callback(new Error('两次输入的密码不一致'))
+        }
+      }
+      callback()
+    }
+    const rules = reactive({
+      new: [
+        { required: true, message: '请输入新密码' },
+        { validator: Checks, trigger: 'blur' }
+      ],
+      old: [{ required: true, message: '请输入旧密码' }],
+      check: [
+        { required: true, message: '请确认新密码' },
+        { validator: Checks, trigger: 'blur' }
+      ]
+    })
+    const ruleFormRef = ref<HTMLElement | null>(null)
+
     const changeCollapsed = () => store.commit('layout/changeCollapsed')
     const logout = () => {
       ElMessageBox.confirm('确定要退出登录吗？', '系统提示', {
@@ -109,7 +144,7 @@ export default defineComponent({
       })
     }
     const onChangePWD = () => {
-      router.push({ name: 'Changepwd' })
+      changePwdDialog.value = true
     }
     return {
       menubar: store.state.layout.menubar,
@@ -117,7 +152,11 @@ export default defineComponent({
       changeCollapsed,
       logout,
       ...breadcrumb(route),
-      onChangePWD
+      onChangePWD,
+      changePwdDialog,
+      ruleForm,
+      rules,
+      ruleFormRef
     }
   }
 })

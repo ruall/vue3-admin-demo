@@ -159,7 +159,7 @@ export default defineComponent({
               JSON.stringify(url)
               insert(url)
             } else {
-              this.$message.error(result.data.message)
+              ElMessage.error(result.data.message)
             }
           })
       }

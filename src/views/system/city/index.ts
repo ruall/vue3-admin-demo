@@ -17,8 +17,9 @@ export const getDatas = () => {
     tableData: [],
     columns: [
       { prop: 'name1', label: '排序' },
-      { prop: 'name2', label: '类型名称' },
-      { prop: 'name3', label: '状态' },
+      { prop: 'name2', label: '城市名称' },
+      { prop: 'name3', label: '创建时间', width: '200px' },
+      { prop: 'name4', label: '状态' },
       { slot: 'operate' }
     ],
     pageNo: 1,
@@ -34,16 +35,19 @@ export const getDatas = () => {
       info.tableData = [
         {
           name1: 1,
-          name2: '印花厂',
-          name3: '显示'
+          name2: '普拉多',
+          name3: '2019/01/01 00:00:00',
+          name4: '显示'
         },
         {
           name1: 9999,
-          name2: '服装厂',
-          name3: '隐藏'
+          name2: '罗马',
+          name3: '2019/01/01 00:00:00',
+          name4: '隐藏'
         }
       ]
       info.loading = false
+      console.log(info.tableData)
     }, 3000)
   }
   const handleCurrentChange = (val: number) => {
