@@ -33,11 +33,11 @@ export const getDatas = () => {
         type: 'select',
         list: [
           {
-            label: '',
+            label: '类型一',
             val: 0
           },
           {
-            label: '',
+            label: '类型二',
             val: 1
           }
         ]
@@ -48,11 +48,11 @@ export const getDatas = () => {
         type: 'select',
         list: [
           {
-            label: '',
+            label: '类目一',
             val: 0
           },
           {
-            label: '',
+            label: '类目二',
             val: 1
           }
         ]
@@ -63,11 +63,11 @@ export const getDatas = () => {
         type: 'select',
         list: [
           {
-            label: '',
+            label: '状态一',
             val: 0
           },
           {
-            label: '',
+            label: '状态二',
             val: 1
           }
         ]

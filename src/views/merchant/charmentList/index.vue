@@ -19,7 +19,14 @@
       </el-table-column>
     </template>
   </qp-table>
-  <el-dialog v-model="info.dialogInfo.isVisible" title="编辑" width="70%" center>
+  <el-dialog
+    v-model="info.dialogInfo.isVisible"
+    title="编辑"
+    width="70%"
+    center
+    :close-on-click-modal="false"
+    :show-close="false"
+  >
     <div class="dialog-content"><dialogInfo ref="dialogRef" /></div>
     <template #footer>
       <span class="dialog-footer">
@@ -39,17 +46,20 @@ const { info, searchFun, handleCurrentChange, getList } = getDatas()
 const dialogRef = ref<HTMLElement | null>(null)
 
 const edit = (row: IObj) => {
+  console.log(row)
   info.dialogInfo.isVisible = true
 }
 
 const onCancel = () => {
   nextTick(() => {
     ;(dialogRef.value as IObj)?.cancel()
+    info.dialogInfo.isVisible = false
   })
 }
 const onSubmit = () => {
   nextTick(() => {
     ;(dialogRef.value as IObj)?.submit()
+    info.dialogInfo.isVisible = false
   })
 }
 </script>

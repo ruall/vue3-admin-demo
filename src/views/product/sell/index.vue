@@ -20,7 +20,7 @@
       </el-table-column>
     </template>
   </qp-table>
-  <el-dialog v-model="info.dialogInfo.isVisible" width="70%" center>
+  <el-dialog v-model="info.dialogInfo.isVisible" width="70%" center :close-on-click-modal="false" :show-close="false">
     <div class="dialog-content"><dialogInfo ref="dialogRef" /></div>
     <template #footer>
       <span class="dialog-footer">
@@ -29,7 +29,14 @@
       </span>
     </template>
   </el-dialog>
-  <el-dialog v-model="info.top.isVisible" title="请选择置顶时间" width="45%" center>
+  <el-dialog
+    v-model="info.top.isVisible"
+    title="请选择置顶时间"
+    width="45%"
+    center
+    :close-on-click-modal="false"
+    :show-close="false"
+  >
     <el-radio-group v-model="info.top.time">
       <el-radio :label="0">24小时</el-radio>
       <el-radio :label="1">

@@ -32,7 +32,7 @@
         v-if="layout.setting.showTags"
         class="layout-main-tags h-10 leading-10 overflow-hidden shadow text-sm text-gray-600 px-3 position"
       >
-        <layout-tags />
+        <!-- <layout-tags /> -->
       </div>
       <div class="layout-main-content flex-1 overflow-hidden">
         <layout-content />
@@ -49,7 +49,7 @@ import { defineComponent, onMounted } from 'vue'
 import LayoutContent from '/@/layout/components/content.vue'
 import LayoutMenubar from '/@/layout/components/menubar.vue'
 import LayoutNavbar from '/@/layout/components/navbar.vue'
-import LayoutTags from '/@/layout/components/tags.vue'
+// import LayoutTags from '/@/layout/components/tags.vue'
 import { useStore } from '/@/store/index'
 import { throttle } from '/@/utils/index'
 import logo from '/@/assets/logo/logo_white.png'
@@ -60,8 +60,8 @@ export default defineComponent({
   components: {
     LayoutContent,
     LayoutMenubar,
-    LayoutNavbar,
-    LayoutTags
+    LayoutNavbar
+    // LayoutTags
   },
   setup() {
     const store = useStore()

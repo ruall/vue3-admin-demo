@@ -55,7 +55,14 @@
       </span>
     </template>
   </el-dialog>
-  <el-dialog v-model="info.reportDialog.isVisible" title="审核驳回" width="40%" center>
+  <el-dialog
+    v-model="info.reportDialog.isVisible"
+    title="审核驳回"
+    width="40%"
+    center
+    :close-on-click-modal="false"
+    :show-close="false"
+  >
     <el-input
       v-model="info.reportDialog.txt"
       type="textarea"
