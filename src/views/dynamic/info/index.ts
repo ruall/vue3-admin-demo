@@ -23,7 +23,7 @@ export const getDatas = () => {
     loading: true,
     searchData: {
       dates: { label: '入驻时间', val: '', type: 'timerange' },
-      input: { label: '动态标题/发布人', val: '', showIcon: 'el-icon-search' },
+      input: { label: '动态标题/发布人', val: '', showSearchIcon: true },
       sorts: {
         label: '请选择动态分类',
         val: '',

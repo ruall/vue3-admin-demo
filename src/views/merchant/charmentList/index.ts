@@ -26,7 +26,7 @@ export const getDatas = () => {
     loading: true,
     searchData: {
       dates: { label: '入驻时间', val: '', type: 'timerange' },
-      input: { label: '企业名称', val: '', showIcon: 'el-icon-search' },
+      input: { label: '企业名称', val: '', showSearchIcon: true },
       status: {
         label: '企业类型',
         val: '',

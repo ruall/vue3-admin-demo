@@ -16,23 +16,23 @@
     <div>
       <span class="mr-4 mb-4 border inline-flex close">
         <el-icon class="el-icon-close" @click="del"></el-icon>
-        <el-image style="width: 100px; height: 100px" :fit="fit"></el-image>
+        <el-image style="width: 100px; height: 100px" :fit="'cover'"></el-image>
       </span>
       <span class="mr-4 mb-4 border inline-flex close">
         <el-icon class="el-icon-close"></el-icon>
-        <el-image style="width: 100px; height: 100px" :fit="fit"></el-image>
+        <el-image style="width: 100px; height: 100px" :fit="'cover'"></el-image>
       </span>
       <span class="mr-4 mb-4 border inline-flex close">
         <el-icon class="el-icon-close"></el-icon>
-        <el-image style="width: 100px; height: 100px" :fit="fit"></el-image>
+        <el-image style="width: 100px; height: 100px" :fit="'cover'"></el-image>
       </span>
       <span class="mr-4 mb-4 border inline-flex close">
         <el-icon class="el-icon-close"></el-icon>
-        <el-image style="width: 100px; height: 100px" :fit="fit"></el-image>
+        <el-image style="width: 100px; height: 100px" :fit="'cover'"></el-image>
       </span>
       <span class="mr-4 mb-4 border inline-flex close">
         <el-icon class="el-icon-close"></el-icon>
-        <el-image style="width: 100px; height: 100px" :fit="fit"></el-image>
+        <el-image style="width: 100px; height: 100px" :fit="'cover'"></el-image>
       </span>
     </div>
     <template #footer>

@@ -17,7 +17,7 @@
       </el-table-column>
     </template>
   </qp-table>
-  <el-dialog v-model="info.dialogInfo.isVisible" width="50%" center>
+  <el-dialog v-model="info.dialogInfo.isVisible" width="50%" center :close-on-click-modal="false" :show-close="false">
     <el-form
       ref="ruleFormRef"
       :model="info.dialogInfo.ruleForm"

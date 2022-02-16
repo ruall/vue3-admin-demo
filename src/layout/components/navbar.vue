@@ -1,20 +1,18 @@
 <template>
   <div class="flex items-center px-4">
-    <span
-      class="text-2xl cursor-pointer"
-      :class="{
-        'el-icon-s-fold': !menubar.status,
-        'el-icon-s-unfold': menubar.status
-      }"
-      @click="changeCollapsed"
-    />
+    <el-icon class="text-2xl cursor-pointer" @click="changeCollapsed">
+      <Fold v-if="!menubar.status" />
+      <Expand v-if="menubar.status" />
+    </el-icon>
   </div>
   <div class="flex items-center flex-row-reverse px-4 min-width-32">
     <!-- 用户下拉 -->
     <el-dropdown>
       <span class="el-dropdown-link flex flex-center mx-2">
         <span class="ml-2">{{ userInfo.nickName }}</span>
-        <i class="el-icon-arrow-down el-icon--right" />
+        <el-icon class="el-icon--right">
+          <arrow-down />
+        </el-icon>
       </span>
       <template #dropdown>
         <el-dropdown-menu>
@@ -27,7 +25,7 @@
   <el-dialog
     v-model="changePwdDialog"
     title="修改密码"
-    width="60%"
+    width="40%"
     center
     :show-close="false"
     :close-on-click-modal="false"
@@ -36,8 +34,8 @@
       <el-form-item label="旧密码" prop="old">
         <el-input v-model="ruleForm.old" type="password" autocomplete="off" show-password></el-input>
       </el-form-item>
-      <el-form-item label="新密码" prop="new">
-        <el-input v-model="ruleForm.new" type="password" autocomplete="off" show-password></el-input>
+      <el-form-item label="新密码" prop="newPwd">
+        <el-input v-model="ruleForm.newPwd" type="password" autocomplete="off" show-password></el-input>
       </el-form-item>
       <el-form-item label="确认新密码" prop="check">
         <el-input v-model="ruleForm.check" type="password" show-password></el-input>
@@ -57,8 +55,10 @@ import { defineComponent, reactive, ref, watch } from 'vue'
 import { useStore } from '/@/store/index'
 import { useRoute, RouteLocationNormalizedLoaded } from 'vue-router'
 import Notice from '/@/layout/components/notice.vue'
+import 'element-plus/es/components/message-box/style/css'
 import { ElMessageBox } from 'element-plus'
 import { getLocal } from '/@/utils'
+import { ArrowDown, Fold, Expand } from '@element-plus/icons-vue'
 
 interface IBreadcrumbList {
   path: string
@@ -94,7 +94,10 @@ const breadcrumb = (route: RouteLocationNormalizedLoaded) => {
 export default defineComponent({
   name: 'LayoutNavbar',
   components: {
-    Notice
+    Notice,
+    ArrowDown,
+    Fold,
+    Expand
   },
   setup() {
     const store = useStore()
@@ -102,25 +105,25 @@ export default defineComponent({
     const userInfo = getLocal('userInfo') as any
     const changePwdDialog = ref(false)
     const ruleForm = reactive({
-      new: '',
+      newPwd: '',
       old: '',
       check: ''
     })
     const Checks = (rule: { field: string }, value: any, callback: (arg0?: Error | undefined) => void) => {
-      if (rule.field === 'new') {
+      if (rule.field === 'newPwd') {
         const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
         if (!reg.test(value)) {
           callback(new Error('请输入6—15位的密码，允许输入数字、字母、特殊符号。'))
         }
       } else if (rule.field === 'check') {
-        if (ruleForm.check !== ruleForm.new) {
+        if (ruleForm.check !== ruleForm.newPwd) {
           callback(new Error('两次输入的密码不一致'))
         }
       }
       callback()
     }
     const rules = reactive({
-      new: [
+      newPwd: [
         { required: true, message: '请输入新密码' },
         { validator: Checks, trigger: 'blur' }
       ],
@@ -129,7 +132,7 @@ export default defineComponent({
         { required: true, message: '请确认新密码' },
         { validator: Checks, trigger: 'blur' }
       ]
-    })
+    }) as IObj
     const ruleFormRef = ref<HTMLElement | null>(null)
 
     const changeCollapsed = () => store.commit('layout/changeCollapsed')
@@ -139,9 +142,11 @@ export default defineComponent({
         cancelButtonText: '取消',
         type: 'warning',
         center: true
-      }).then(() => {
-        store.commit('layout/logout')
       })
+        .then(() => {
+          store.commit('layout/logout')
+        })
+        .catch(() => {})
     }
     const onChangePWD = () => {
       changePwdDialog.value = true
@@ -156,7 +161,10 @@ export default defineComponent({
       changePwdDialog,
       ruleForm,
       rules,
-      ruleFormRef
+      ruleFormRef,
+      ArrowDown,
+      Fold,
+      Expand
     }
   }
 })
@@ -188,5 +196,11 @@ export default defineComponent({
   font-size: 14px;
   background: url('/@/assets/logo/translation.png') no-repeat center;
   background-size: cover;
+}
+
+.el-dropdown-link {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 </style>

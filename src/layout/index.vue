@@ -10,15 +10,15 @@
       :class="{
         'w-64': layout.menubar.status === 0 || layout.menubar.status === 2,
         'w-0': layout.menubar.status === 3,
-        'w-20': layout.menubar.status === 1,
+        'w-16': layout.menubar.status === 1,
         'absolute z-30': layout.menubar.status === 2 || layout.menubar.status === 3
       }"
     >
       <div class="layout-sidebar-logo flex h-12 relative flex-center shadow-lg">
-        <img :src="logo" width="30" alt="" class="mr-2 m-logo" v-if="layout.menubar.status !== 1" />
-        <span>后台管理系统</span>
+        <img :src="logo" width="30" alt="" class="mr-2 m-logo" />
+        <span v-if="layout.menubar.status !== 1">后台管理系统</span>
       </div>
-      <div class="layout-sidebar-menubar flex flex-1 overflow-hidden">
+      <div class="layout-sidebar-menubar flex overflow-hidden">
         <layout-menubar />
       </div>
     </div>

@@ -62,8 +62,8 @@ export default defineComponent({
     const filterMenubarData = filterMenubar(menubar.menuList)
 
     const activeMenu = computed(() => {
-      if (route.meta.activeMenu) return route.meta.activeMenu
-      return route.path
+      if (route.meta.activeMenu) return route.meta.activeMenu as string
+      return route.path as string
     })
     const onOpenChange = (d: any) => {
       router.push({ path: d })

@@ -13,7 +13,7 @@
         v-model="item.val"
         :style="{ width: item.width + 'px' }"
         clearable
-        :prefix-icon="item.showIcon ? item.showIcon : ''"
+        :prefix-icon="item.showSearchIcon ? Search : ''"
         :placeholder="inputComputed(item.label)"
       />
       <el-date-picker
@@ -48,18 +48,28 @@
         clearable
       />
     </el-form-item>
-    <el-button type="primary" icon="el-icon-search" @click="onSubmitForm()">搜索</el-button>
-    <el-button v-if="showReset" icon="el-icon-refresh" @click="onResetForm()">重置</el-button>
-    <el-button type="primary" v-if="showExport" @click="exportBtn()">导出数据</el-button>
-    <el-button type="primary" v-if="showBtn" @click="btnClick()">{{ btnText }}</el-button>
-    <el-button v-for="(item, index) in btnList" :key="index" :type="item.type" @click="item.fun(item.obj)">
-      {{ item.name }}
-    </el-button>
+    <el-form-item>
+      <el-button type="primary" :icon="Search" @click="onSubmitForm()">搜索</el-button>
+    </el-form-item>
+    <el-form-item v-if="showReset">
+      <el-button :icon="Refresh" @click="onResetForm()">重置</el-button>
+    </el-form-item>
+    <el-form-item><el-button type="primary" v-if="showExport" @click="exportBtn()">导出数据</el-button></el-form-item>
+    <el-form-item>
+      <el-button type="primary" v-if="showBtn" @click="btnClick()">{{ btnText }}</el-button>
+    </el-form-item>
+    <el-form-item v-for="(item, index) in btnList" :key="index">
+      <el-button :type="item.type" @click="item.fun(item.obj)">
+        {{ item.name }}
+      </el-button>
+    </el-form-item>
   </el-form>
   <!-- </el-card> -->
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
+import { Search, Refresh } from '@element-plus/icons-vue'
+
 export default defineComponent({
   name: 'qp-search',
   props: {
@@ -133,7 +143,9 @@ export default defineComponent({
       onSubmitForm,
       onResetForm,
       defaultTime,
-      btnClick
+      btnClick,
+      Search,
+      Refresh
     }
   }
 })

@@ -72,7 +72,7 @@ const mutations = {
     localStorage.removeItem('token')
     localStorage.removeItem('userInfo')
     localStorage.removeItem('setting')
-    history.go(0)
+    router.push('/login')
   },
   setRoutes(state: ILayout, data: Array<IMenubarList>): void {
     //@ts-ignore 路由权限配置

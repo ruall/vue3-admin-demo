@@ -24,7 +24,7 @@ export const getDatas = () => {
     loading: true,
     searchData: {
       dates: { label: '注册时间', val: '', type: 'timerange' },
-      input: { label: '用户昵称/ID/绑定手机号', val: '', showIcon: 'el-icon-search' },
+      input: { label: '用户昵称/ID/绑定手机号', val: '', showSearchIcon: true },
       status: {
         label: '企业类型',
         val: '',

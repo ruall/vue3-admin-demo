@@ -1,41 +1,26 @@
 <template>
-  <el-submenu
-    v-if="menuList.children && menuList.children.length > 0"
-    :key="menuList.path"
-    :index="menuList.path"
-  >
+  <el-sub-menu v-if="menuList.children && menuList.children.length > 0" :key="menuList.path" :index="menuList.path">
     <template #title>
       <!-- <i :class="menuList.meta.icon || 'el-icon-location'" /> -->
-      <img :src="getIcon(menuList.meta.icon)" alt="" />
+      <img :src="getIcon(menuList.meta.icon)" alt="" class="align-middle text-center" />
       <!-- <i :style="{ background: `url(${getIcon(menuList.meta.icon)}) no-repeat center`, backgroundSize: 'cover' }"></i> -->
       <span>{{ menuList.meta.title }}</span>
       <div v-if="menuList.meta.showRedPoint" class="inline-block">
-        <div
-          v-if="!isParentHidden"
-          class="ml-2 w-2 h-2 bg-red-500 rounded-full"
-        ></div>
+        <div v-if="!isParentHidden" class="ml-2 w-2 h-2 bg-red-500 rounded-full"></div>
       </div>
     </template>
     <el-menu-item-group>
-      <menubar-item
-        v-for="v in menuList.children"
-        :key="v.path"
-        :index="v.path"
-        :menu-list="v"
-      />
+      <menubar-item v-for="v in menuList.children" :key="v.path" :index="v.path" :menu-list="v" />
     </el-menu-item-group>
-  </el-submenu>
+  </el-sub-menu>
 
-  <el-menu-item v-else :key="menuList.path" :index="menuList.path">
+  <el-menu-item v-else :index="menuList.path">
     <!-- <i :class="getIcon(menuList.meta.icon)" /> -->
-    <img :src="getIcon(menuList.meta.icon)" alt="" />
+    <img :src="getIcon(menuList.meta.icon)" alt="" class="align-middle text-center" />
     <template #title>
       {{ menuList.meta.title }}
       <div v-if="menuList.meta.showRedPoint" class="inline-block">
-        <div
-          v-if="isHidden(menuList.meta.title)"
-          class="ml-2 w-2 h-2 bg-red-500 rounded-full"
-        ></div>
+        <div v-if="isHidden(menuList.meta.title)" class="ml-2 w-2 h-2 bg-red-500 rounded-full"></div>
       </div>
     </template>
   </el-menu-item>
@@ -52,8 +37,8 @@ export default defineComponent({
       type: Object as PropType<IMenubarList>,
       default: () => {
         return {}
-      },
-    },
+      }
+    }
   },
   setup() {
     const store = useStore()
@@ -94,9 +79,9 @@ export default defineComponent({
     return {
       isHidden,
       isParentHidden,
-      getIcon,
+      getIcon
     }
-  },
+  }
 })
 </script>
 

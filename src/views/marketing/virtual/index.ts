@@ -59,7 +59,7 @@ export const getDatas = () => {
             }
           ]
         },
-        input: { label: '商品标题', val: '', showIcon: 'el-icon-search' }
+        input: { label: '商品标题', val: '', showSearchIcon: true }
       }
     }
   })
