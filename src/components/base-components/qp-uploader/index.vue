@@ -18,14 +18,18 @@
       :on-remove="onRemove"
       :before-upload="onImageBeforeUpload"
     >
-      <i v-if="fileType === 'image'" class="el-icon-plus"></i>
+      <el-icon v-if="fileType === 'image'">
+        <Plus />
+      </el-icon>
       <el-button v-else>上传</el-button>
       <template #tip>
         <div class="el-upload__tip" v-if="!loading">{{ placeholderStr }}</div>
       </template>
     </el-upload>
     <div class="w-20 h-20 loading-box flex justify-center items-center" v-else-if="loading">
-      <i class="el-icon-loading"></i>
+      <el-icon class="is-loading">
+        <Loading />
+      </el-icon>
       <i>上传中</i>
     </div>
     <el-dialog v-model="dialogVisible" append-to-body style="text-align: center">
@@ -41,9 +45,11 @@ import { ElMessage } from 'element-plus'
 import { fileExt } from '/@/utils/file'
 import Compressor from 'compressorjs'
 import { preview } from '/@/utils/file'
+import { Plus, Loading } from '@element-plus/icons-vue'
 
 export default defineComponent({
   name: 'qp-uploader',
+  components: { Plus, Loading },
   props: {
     fileType: {
       type: String as PropType<string>,
@@ -65,7 +71,7 @@ export default defineComponent({
       default: ''
     },
     disabled: {
-      type: Boolean as PropType<Boolean>,
+      type: Boolean as PropType<boolean>,
       default: false
     },
     fileList: {
@@ -85,7 +91,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const state = reactive({
       baseUrl: import.meta.env.VITE_BASE_API,
-      headers: {
+      headers: <any>{
         Authorization: 'bearer ' + store.state.layout.token.ACCESS_TOKEN
       },
       data: {
@@ -205,7 +211,7 @@ export default defineComponent({
       }
     }
 
-    const onChange = (file: any, fileList: []) => {
+    const onChange: any = (file: any, fileList: []) => {
       if (file && file.status === 'success') {
         if (fileList.length >= props.limit) {
           state.isMax = true
@@ -215,7 +221,7 @@ export default defineComponent({
       }
     }
 
-    const onRemove = (file: any, fileList: []) => {
+    const onRemove: any = (file: any, fileList: []) => {
       if (file && file.status === 'success') {
         state.fileList = fileList
       }
@@ -231,7 +237,7 @@ export default defineComponent({
       ElMessage.warning(`最多只能上传${props.limit}张${props.fileType === 'image' ? '图片' : '附件'}~`)
     }
 
-    const handlePreview = (file: any) => {
+    const handlePreview: any = (file: any) => {
       if (fileExt(file.url) === 'jpg' || fileExt(file.url) === 'png' || fileExt(file.url) === 'jpeg') {
         state.imageUrl = file.url
         state.dialogVisible = true

@@ -46,7 +46,14 @@
       </el-table-column>
     </template>
   </qp-table>
-  <el-dialog v-model="info.dialogInfo.isVisible" title="编辑" width="70%" center>
+  <el-dialog
+    v-model="info.dialogInfo.isVisible"
+    title="编辑"
+    width="70%"
+    center
+    :close-on-click-modal="false"
+    :show-close="false"
+  >
     <div class="dialog-content"><dialogInfo ref="dialogRef" /></div>
     <template #footer>
       <span class="dialog-footer">

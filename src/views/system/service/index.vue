@@ -5,19 +5,26 @@
     </el-form-item>
     <el-form-item label="微信号" prop="name2">
       <el-row>
-        <el-col :span="12">
-          <el-input v-model="form.name2" placeholder="请输入微信号" clearable maxlength="10" show-word-limit></el-input>
+        <el-col :span="24">
+          <el-input
+            class="w-auto"
+            v-model="form.name2"
+            placeholder="请输入微信号"
+            clearable
+            maxlength="10"
+            show-word-limit
+          ></el-input>
         </el-col>
       </el-row>
     </el-form-item>
     <el-form-item label="手机号" prop="name3">
       <el-row :gutter="10">
-        <el-col :span="4">
+        <el-col :span="6">
           <el-select v-model="form.name4">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="18">
           <el-input v-model="form.name3" placeholder="请输入手机号" clearable maxlength="11" show-word-limit></el-input>
         </el-col>
       </el-row>
@@ -29,11 +36,8 @@
 </template>
 <script lang="ts">
 import { getDatas } from './index'
-import { qpUploader } from '/@/components'
-import { defineComponent } from 'vue'
 
 export default defineComponent({
-  components: { qpUploader },
   setup() {
     const { form, options, onFileChange, rules } = getDatas()
     const onSubmit = () => {

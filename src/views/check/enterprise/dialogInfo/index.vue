@@ -57,11 +57,9 @@
 </template>
 <script lang="ts">
 import { getDatas } from './index'
-import { qpUploader } from '/@/components'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  components: { qpUploader },
   setup() {
     const { form, info, cascaderProps, onFileChange1, rules } = getDatas()
     const submit = () => {

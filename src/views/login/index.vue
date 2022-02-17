@@ -9,18 +9,12 @@
       <div class="mt-8 space-y-6" @keyup="enterSubmit">
         <el-form ref="ruleForm" label-position="right" :model="form" :rules="rules">
           <el-form-item prop="name">
-            <el-input
-              v-model="form.name"
-              prefix-icon="el-icon-user"
-              placeholder="请输入账号 "
-              clearable
-              maxlength="30"
-            />
+            <el-input v-model="form.name" :prefix-icon="User" placeholder="请输入账号 " clearable maxlength="30" />
           </el-form-item>
           <el-form-item prop="pwd">
             <el-input
               v-model="form.pwd"
-              prefix-icon="el-icon-lock"
+              :prefix-icon="Lock"
               show-password
               type="password"
               maxlength="15"
@@ -42,6 +36,7 @@ import { defineComponent, reactive, ref } from 'vue'
 import { store } from '/@/store/index'
 import { ElNotification } from 'element-plus'
 import { validate } from '/@/utils/formExtend'
+import { User, Lock } from '@element-plus/icons-vue'
 
 const formRender = () => {
   let form = reactive({
@@ -108,7 +103,9 @@ export default defineComponent({
   name: 'Login',
   setup() {
     return {
-      ...formRender()
+      ...formRender(),
+      User,
+      Lock
     }
   }
 })

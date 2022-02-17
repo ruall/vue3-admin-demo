@@ -6,6 +6,11 @@ import { store } from '/@/store/index'
 // import '/@/mock/index'
 import '/@/permission'
 
+//只使用组件 API，需要手动导入样式文件
+import 'element-plus/es/components/message-box/style/css'
+import 'element-plus/es/components/message/style/css'
+import 'element-plus/es/components/loading/style/css'
+
 import 'nprogress/nprogress.css'
 import '/@/styles/index.css'
 import '/@/styles/override-element-ui.scss'

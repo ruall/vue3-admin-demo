@@ -55,7 +55,6 @@ import { defineComponent, reactive, ref, watch } from 'vue'
 import { useStore } from '/@/store/index'
 import { useRoute, RouteLocationNormalizedLoaded } from 'vue-router'
 import Notice from '/@/layout/components/notice.vue'
-import 'element-plus/es/components/message-box/style/css'
 import { ElMessageBox } from 'element-plus'
 import { getLocal } from '/@/utils'
 import { ArrowDown, Fold, Expand } from '@element-plus/icons-vue'
@@ -161,10 +160,7 @@ export default defineComponent({
       changePwdDialog,
       ruleForm,
       rules,
-      ruleFormRef,
-      ArrowDown,
-      Fold,
-      Expand
+      ruleFormRef
     }
   }
 })
