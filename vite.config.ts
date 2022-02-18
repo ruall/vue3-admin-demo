@@ -6,6 +6,8 @@ import IconsResolver from 'unplugin-icons/resolver'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import OptimizationPersist from 'vite-plugin-optimize-persist'
+import PkgConfig from 'vite-plugin-package-config'
 
 const pathSrc = path.resolve(__dirname, 'src')
 const isProduction = process.env.NODE_ENV === 'production'
@@ -44,7 +46,7 @@ export default defineConfig({
     vue(),
     AutoImport({
       // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
-      imports: ['vue'],
+      imports: ['vue', 'vue-router'],
       // 自动导入 Element Plus 相关函数
       resolvers: [ElementPlusResolver()],
       dts: path.resolve(pathSrc, 'auto-imports.d.ts')
@@ -62,7 +64,9 @@ export default defineConfig({
     }),
     Icons({
       autoInstall: true
-    })
+    }),
+    PkgConfig(),
+    OptimizationPersist()
   ],
   css: {
     postcss: {
