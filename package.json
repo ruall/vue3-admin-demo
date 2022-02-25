@@ -1,6 +1,6 @@
 {
   "author": "lixiang",
-  "name": "pb-bk-web",
+  "name": "huashang-bk-admin",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --mode development",
